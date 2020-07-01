@@ -1,0 +1,9 @@
+joblib==0.15.1
+numpy==1.18.5
+opencv-python==4.2.0.34
+py4j==0.10.9
+pyspark==3.0.0
+pyspark-stubs==3.0.0.dev8
+scikit-learn==0.23.1
+scipy==1.4.1
+threadpoolctl==2.1.0
