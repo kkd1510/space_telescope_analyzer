@@ -1,0 +1,47 @@
+=== Downgrade Python version ===
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.7
+
+=== Spark config ===
+
+spark_home = /opt/spark
+
+ls /opt/spark/bin
+ls /opt/spark/sbin
+
+Start master:
+start-master.sh
+
+Start slave:
+start-slave.sh spark://NAS:7077
+
+Stop slave:
+stop-slave.sh
+
+Stop master:
+stop-master.sh
+
+pyspark --driver-class-path "jdbc_driver/postgresql-42.2.14.jar" --jars "jdbc_driver/postgresql-42.2.14.jar"
+
+=== Remote work submission ===
+
+spark-submit --master spark://192.168.1.2:7077 --name "text_data" --driver-class-path "jdbc_driver/postgresql-42.2.14.jar" --jars "jdbc_driver/postgresql-42.2.14.jar" text_data.py
+
+spark-submit --master spark://192.168.1.2:7077 --name "d_color" dominant_color.py
+
+
+=== Hadoop cluster setup ===
+ls /home/hadoop/hadoop-3.2.1/sbin # Hadoop is the username
+su hadoop
+start-dfs.sh
+start-yarn.sh
+
+=== AWS EMR ====
+https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark-launch.html
+
+
+=== More ===
+
+https://phoenixnap.com/kb/install-spark-on-ubuntu
+https://phoenixnap.com/kb/install-hadoop-ubuntu

@@ -82,5 +82,6 @@ def get_matching_images(desired_color):
                                                     'color_3_delta_e'))
 
     delta_e_assigned_df.show()
+    return delta_e_assigned_df
 
 assign_dominant_colors()

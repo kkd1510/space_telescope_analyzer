@@ -3,24 +3,25 @@ from pyspark.sql import SparkSession
 
 from input_output_manager import IOManager
 
-spark = SparkSession.builder.master("spark://192.168.1.2:7077")\
+IMAGE_T = 'image'
+OBJECT_T = 'object'
+
+PERSIST = True
+
+def transform_text_data_sql(data_type):
+
+    path_object = f"data_sample/{data_type}"
+    read_json_df = spark.read.json(path_object)
+    read_json_df.printSchema()
+    read_json_df.show(2)
+
+    if PERSIST:
+        io_manager = IOManager(spark)
+        io_manager.hdfs_save_dataframe_sql(read_json_df, 'images')
+
+spark = SparkSession.builder.master("local")\
         .config('spark.driver.extraClassPath', 'jdbc_driver/postgresql-42.2.14.jar')\
         .getOrCreate()
 
-def transform_text_data_sql():
-    io_manager = IOManager(spark)
-
-    path_object = "data_sample/object"
-    objects = spark.read.json(path_object) # can be path or single file
-    # objects.printSchema()
-    # objects.show(2)
-
-    path_image = "data_sample/image"
-    images = spark.read.json(path_image)
-    # images.printSchema()
-    # images.show(2)
-
-    io_manager.hdfs_save_dataframe_sql(images, 'images')
-    io_manager.hdfs_save_dataframe_sql(objects, 'objects')
-
-transform_text_data_sql()
+transform_text_data_sql(IMAGE_T)
+transform_text_data_sql(OBJECT_T)
