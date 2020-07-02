@@ -14,7 +14,7 @@ Start master:
 start-master.sh
 
 Start slave:
-start-slave.sh spark://NAS:7077
+start-slave.sh spark://<server-name>:7077
 
 Stop slave:
 stop-slave.sh
@@ -26,9 +26,9 @@ pyspark --driver-class-path "jdbc_driver/postgresql-42.2.14.jar" --jars "jdbc_dr
 
 === Remote work submission ===
 
-spark-submit --master spark://192.168.1.2:7077 --name "text_data" --driver-class-path "jdbc_driver/postgresql-42.2.14.jar" --jars "jdbc_driver/postgresql-42.2.14.jar" text_data.py
+spark-submit --master spark://<server-name:7077 --name "text_data" --driver-class-path "jdbc_driver/postgresql-42.2.14.jar" --jars "jdbc_driver/postgresql-42.2.14.jar" text_data.py
 
-spark-submit --master spark://192.168.1.2:7077 --name "d_color" dominant_color.py
+spark-submit --master spark://<server-name:7077 --name "d_color" dominant_color.py
 
 
 === Hadoop cluster setup ===
@@ -44,4 +44,7 @@ https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark-launch.html
 === More ===
 
 https://phoenixnap.com/kb/install-spark-on-ubuntu
+- Specifiy Java 8 on 20.04 to prevent weird exception
+
 https://phoenixnap.com/kb/install-hadoop-ubuntu
+- Small mistake on datanode and namenode dirs configuration
