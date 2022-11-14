@@ -1,6 +1,6 @@
 colormath==3.0.0
 decorator==4.4.2
-joblib==0.15.1
+joblib==1.2.0
 networkx==2.4
 numpy==1.22.0
 opencv-python==4.2.0.34
